@@ -1,0 +1,174 @@
+
+
+/* =========================================================================
+   🎮 CORE GAME INTERFACE SYSTEM RESET
+   ========================================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+body {
+    width: 1000px;
+    height: 700px;
+    overflow: hidden;
+    background-color: #1a1510;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Base structural layout for all screen layers */
+.game-view {
+    width: 1000px;
+    height: 700px;
+    position: relative;
+    display: none; /* Controlled via script navigation */
+}
+
+/* Clear transparent action hitboxes */
+.menu-hitbox {
+    position: absolute;
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 0); /* Keep 0 to hide, change to 0.3 to debug placement */
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+.menu-hitbox:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================================================
+   🎬 BACKDROP GRAPHIC ASSET BINDINGS
+   ========================================================================= */
+
+#entrance-screen {
+    display: block; /* Boot screen default visible */
+    background: url('./assets/Gemini_Generated_Image_f1gmpvf1gmpvf1gm.png') no-repeat center center;
+    background-size: cover;
+}
+
+#worker-screen {
+    background: url('./assets/Gemini_Generated_Image_wsawktwsawktwsaw.png') no-repeat center center;
+    background-size: cover;
+}
+
+#customer-screen {
+    background: url('./assets/Gemini_Generated_Image_5vel3q5vel3q5vel.png') no-repeat center center;
+    background-size: cover;
+}
+
+/* =========================================================================
+   🧑‍🍳 INTERACTION INTERFACE LAYERS (Kitchen Matrix)
+   ========================================================================= */
+
+/* The pantry alignment grid on the left shelf */
+.pantry-shelf-overlay {
+    position: absolute;
+    left: 45px;
+    top: 150px;
+    width: 100px;
+    height: 430px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.draggable-ingredient {
+    width: 64px;
+    height: 64px;
+    cursor: grab;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+.draggable-ingredient:active {
+    cursor: grabbing;
+}
+
+/* The 5 stone table spots in the center */
+.baking-board-overlay {
+    position: absolute;
+    left: 215px;
+    top: 440px;
+    width: 535px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.table-drop-zone {
+    width: 80px;
+    height: 80px;
+    border: 3px dashed transparent;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+.table-drop-zone.drag-over {
+    border-color: #f59e0b;
+    background-color: rgba(245, 158, 11, 0.2);
+}
+
+/* Real-time stats fonts */
+.ui-text-label {
+    color: #fef3c7;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 2px 2px 0px #4a3728;
+}
+
+/* =========================================================================
+   🧾 OVERLAYS & ALERTS (Popups & Success Banners)
+   ========================================================================= */
+
+#success-toast {
+    position: absolute;
+    top: -90px;
+    left: 250px;
+    width: 500px;
+    height: 80px;
+    background: url('./assets/Gemini_Generated_Image_r7y9gvr7y9gvr7y9.png') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 100;
+}
+#success-toast.show {
+    top: 20px;
+}
+#toast-text {
+    color: #4a3728;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1000px;
+    height: 700px;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+}
+
+.modal-frame {
+    width: 550px;
+    height: 380px;
+    background: url('./assets/Gemini_Generated_Image_t0k7ekt0k7ekt0k7.png') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    color: #4a3728;
+    padding: 30px;
+}
